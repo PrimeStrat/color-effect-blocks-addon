@@ -1,0 +1,26 @@
+{
+    "format_version": 2,
+    "header": {
+        "name": "pack.name",
+        "description": "pack.description",
+        "uuid": "2fa4e93d-8487-4a48-bbc0-862197d2a60c",
+        "version": [1, 0, 0],
+        "min_engine_version": [1, 21, 120]
+    },
+    "modules": [
+        {
+            "type": "resources",
+            "uuid": "e5177f53-e6f2-4a0e-b94a-0e6f8d962a13",
+            "version": [1, 0, 0]
+        }
+    ],
+    "dependencies": [
+        {
+            "uuid": "90ab3072-a3b1-4acd-b548-2637e8d784c0",
+            "version": [1, 0, 0]
+        }
+    ],
+    "metadata": {
+        "authors": ["PrimeStrat"]
+    }
+}

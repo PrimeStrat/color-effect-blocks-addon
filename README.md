@@ -54,6 +54,19 @@ means carpets, slabs, and snow layers count as the block you are standing on.
 The effect is refreshed while you stand there and wears off a couple of seconds
 after you step away.
 
+## Potions are safe
+
+The addon never takes away an effect you already have. If you drink a potion of
+the same effect the block gives, the potion is kept. This works both ways:
+
+- A potion lasts longer than the block effect, so the block will not cut it
+  short.
+- A stronger effect is kept. Standing on a Speed I block will not drop you to
+  Speed I while you have Speed II.
+
+Effects from other sources, like beacons or other addons, are treated the same
+way.
+
 ## Checking a block
 
 `/ceb:check` tells you the color of the block you are standing on. It shows the

@@ -10,9 +10,9 @@
 /** @type {ColorDefinition[]} */
 export const COLORS = [
     { id: "white", name: "White", code: "§f", rgb: [233, 236, 236], words: ["white"] },
-    { id: "light_gray", name: "Light Gray", code: "§7", rgb: [142, 142, 134], words: ["light_gray", "silver"] },
+    { id: "light_gray", name: "Light Gray", code: "§8", rgb: [142, 142, 134], words: ["light_gray", "silver"] },
     { id: "gray", name: "Gray", code: "§8", rgb: [62, 68, 71], words: ["gray"] },
-    { id: "black", name: "Black", code: "§8", rgb: [20, 21, 25], words: ["black"] },
+    { id: "black", name: "Black", code: "§0", rgb: [20, 21, 25], words: ["black"] },
     { id: "brown", name: "Brown", code: "§6", rgb: [114, 71, 40], words: ["brown"] },
     { id: "red", name: "Red", code: "§c", rgb: [176, 46, 38], words: ["red"] },
     { id: "orange", name: "Orange", code: "§6", rgb: [240, 118, 19], words: ["orange"] },

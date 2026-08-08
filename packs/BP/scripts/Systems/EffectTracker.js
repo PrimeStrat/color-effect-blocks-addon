@@ -34,6 +34,7 @@ function getStandingColor(player, mode) {
 
 /**
  * Applies the mapped effect to every player standing on a colored block.
+ * An effect from another source, such as a potion, is left alone.
  * @returns {void}
  */
 function tick() {
@@ -51,6 +52,15 @@ function tick() {
         const mapping = getMapping(colorId);
         if (mapping === undefined || mapping.effect === NO_EFFECT) {
             continue;
+        }
+
+        // Anything lasting longer than one refresh, or stronger, came from
+        // elsewhere. Leave it rather than cutting it short or weakening it.
+        const existing = player.getEffect(mapping.effect);
+        if (existing !== undefined) {
+            if (existing.duration > EFFECT_DURATION || existing.amplifier > mapping.amplifier) {
+                continue;
+            }
         }
 
         player.addEffect(mapping.effect, EFFECT_DURATION, {

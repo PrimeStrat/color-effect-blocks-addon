@@ -1,85 +1,39 @@
 # Color Effect Blocks
 
-Gives players a potion effect based on the color of the block they stand on.
-You choose which effect each of the 16 colors gives. Everything is set from an
-in-game menu.
+Stand on a colored block and you get a potion effect. Each of the 16 colors
+gives a different effect.
 
-## How to use
+## Ready to play
 
-1. Add both packs to your world (Behavior Pack and Resource Pack).
-2. Run `/ceb:menu` in chat to open the menu.
-3. Pick "Set Color Effects", choose a color, and pick the effect you want.
-4. Stand on a block of that color to get the effect.
+The addon comes with a default set of effects. Half of the colors help you and
+half of them hurt you.
 
-You need operator permission to open the menu.
+| Good | Bad |
+|---|---|
+| Red: Strength | White: Levitation |
+| Orange: Fire Resistance | Light Gray: Slowness |
+| Lime: Jump Boost | Gray: Weakness |
+| Cyan: Conduit Power | Black: Blindness |
+| Light Blue: Speed | Brown: Hunger |
+| Blue: Night Vision | Yellow: Mining Fatigue |
+| Magenta: Regeneration | Green: Poison |
+| Pink: Health Boost | Purple: Nausea |
 
-## The menu
+New players see a short "How to Play" screen. They also get 1 minute before
+the blocks start to affect them.
 
-**Set Color Effects** lists all 16 colors. Each button shows the effect that
-color gives right now. Open a color to change three things:
+## Make it your own
 
-- Effect: which effect to give, or "None" to turn that color off.
-- Level: effect strength, 1 to 5.
-- Show particles: whether the effect shows swirls around the player.
+Running a server or a minigame? You can change any color to any effect.
 
-**Settings** has the options that apply to the whole addon:
+1. Run `/ceb:menu` in chat. You need operator permission.
+2. Pick a color and choose its effect, level, and particles.
+3. Use Settings to turn the addon on or off, or to change how often it checks.
 
-- Enabled: turn all effects on or off.
-- Detection mode: how the addon decides a block's color. See below.
-- Check interval: how often the addon looks at each player, in ticks. 20 ticks
-  is one second. A bigger number is lighter on the server.
+Your changes are saved in the world.
 
-**Clear All** removes the effect from every color.
+## Commands
 
-## The two modes
-
-**Closest Color** looks at the real color of the block and picks whichever of
-the 16 colors looks nearest. This works on almost every block, including plain
-ones like stone, dirt, and grass. Grass and leaves follow their biome color, so
-swamp grass and jungle grass can give different effects.
-
-**Primary Color** only looks at the block name. A block counts only if its name
-contains a color word, like `blue_wool` or `pink_concrete`. Plain blocks such as
-stone and dirt give nothing. Use this mode if you only want dyed blocks to
-count.
-
-Both modes read `light_blue` and `light_gray` correctly, so light blue wool does
-not count as blue.
-
-## Standing rules
-
-The addon checks the block at your feet first, then the block below you. This
-means carpets, slabs, and snow layers count as the block you are standing on.
-
-The effect is refreshed while you stand there and wears off a couple of seconds
-after you step away.
-
-## Potions are safe
-
-The addon never takes away an effect you already have. If you drink a potion of
-the same effect the block gives, the potion is kept. This works both ways:
-
-- A potion lasts longer than the block effect, so the block will not cut it
-  short.
-- A stronger effect is kept. Standing on a Speed I block will not drop you to
-  Speed I while you have Speed II.
-
-Effects from other sources, like beacons or other addons, are treated the same
-way.
-
-## Checking a block
-
-`/ceb:check` tells you the color of the block you are standing on. It shows the
-block name, its color numbers, and which of the 16 colors it resolved to. This
-is the fastest way to see why a block gives the effect it does.
-
-`/ceb:debug` turns on logging. Every color the addon works out gets written to
-the content log. Run it again to turn it off.
-
-## Notes
-
-- Settings are saved in the world, so they survive a restart.
-- The addon reads each block's map color through the normal script API. No
-  experimental toggles are needed.
-- Magenta is not a natural block color. In Closest Color mode you will only get
-  magenta from dyed blocks such as magenta wool.
+- `/ceb:menu` opens the menu.
+- `/ceb:check` shows the color of the block you are standing on.
+- `/ceb:debug` turns color logging on or off.

@@ -4,9 +4,40 @@ import { getConfig, getMapping } from "./Config.js";
 import { resolveBlockColor } from "./ColorResolver.js";
 
 const EFFECT_DURATION = 40;
+const GRACE_TICKS = 1200;
 
 let runId = undefined;
 let lastInterval = 0;
+
+/** @type {Map<string, number>} */
+const graceEnds = new Map();
+
+/**
+ * Gives a player a grace period during which no color effects apply.
+ * @param {Player} player Player to protect.
+ * @returns {void}
+ */
+export function startGrace(player) {
+    graceEnds.set(player.id, system.currentTick + GRACE_TICKS);
+}
+
+/**
+ * Checks whether a player is still inside their grace period.
+ * @param {Player} player Player to test.
+ * @returns {boolean} True while effects should be skipped.
+ */
+function inGrace(player) {
+    const end = graceEnds.get(player.id);
+    if (end === undefined) {
+        return false;
+    }
+    if (system.currentTick < end) {
+        return true;
+    }
+    graceEnds.delete(player.id);
+    player.sendMessage("§eYour grace period is over. Colored blocks now affect you.§r");
+    return false;
+}
 
 /**
  * Finds the color of the block a player is standing on.
@@ -44,6 +75,9 @@ function tick() {
     }
 
     for (const player of world.getAllPlayers()) {
+        if (inGrace(player)) {
+            continue;
+        }
         const colorId = getStandingColor(player, config.mode);
         if (colorId === undefined) {
             continue;

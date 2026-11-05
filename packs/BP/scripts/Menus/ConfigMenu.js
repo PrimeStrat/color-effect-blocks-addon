@@ -17,7 +17,7 @@ const MODE_VALUES = [MODE_CLOSEST, MODE_PRIMARY];
  * @param {Player} player Player to show the form to.
  * @returns {Promise<Object>} The form response.
  */
-async function showSafe(form, player) {
+export async function showSafe(form, player) {
     let response = await form.show(player);
     while (response.canceled && response.cancelationReason === "UserBusy") {
         await new Promise((resolve) => system.run(resolve));

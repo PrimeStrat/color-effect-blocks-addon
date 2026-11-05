@@ -1,10 +1,27 @@
 import { world, system, BlockComponentTypes, CommandPermissionLevel, CustomCommandStatus, Player } from "@minecraft/server";
 import { loadConfig, getConfig } from "./Systems/Config.js";
-import { startTracker } from "./Systems/EffectTracker.js";
+import { startTracker, startGrace } from "./Systems/EffectTracker.js";
 import { resolveBlockColor, setDebugLogging } from "./Systems/ColorResolver.js";
 import { openMainMenu } from "./Menus/ConfigMenu.js";
+import { openIntro } from "./Menus/IntroMenu.js";
+
+const INTRODUCED_KEY = "ceb:introduced";
 
 let debugEnabled = false;
+
+/**
+ * Gives a first-time player the grace period and the intro form.
+ * @param {Player} player Player who just joined the world.
+ * @returns {void}
+ */
+function onFirstSpawn(player) {
+    if (player.getDynamicProperty(INTRODUCED_KEY) === true) {
+        return;
+    }
+    player.setDynamicProperty(INTRODUCED_KEY, true);
+    startGrace(player);
+    openIntro(player);
+}
 
 /**
  * Reports the map color and resolved color of the block under a player.
@@ -87,6 +104,12 @@ system.beforeEvents.startup.subscribe(({ customCommandRegistry }) => {
             };
         }
     );
+});
+
+world.afterEvents.playerSpawn.subscribe((ev) => {
+    if (ev.initialSpawn) {
+        onFirstSpawn(ev.player);
+    }
 });
 
 world.afterEvents.worldLoad.subscribe(() => {

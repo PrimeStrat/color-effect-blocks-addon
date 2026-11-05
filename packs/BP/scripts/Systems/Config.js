@@ -1,6 +1,6 @@
 import { world } from "@minecraft/server";
 import { COLOR_IDS } from "../Data/Colors.js";
-import { NO_EFFECT } from "../Data/Effects.js";
+import { DEFAULT_EFFECTS, NO_EFFECT } from "../Data/Effects.js";
 import { MODE_CLOSEST } from "./ColorResolver.js";
 
 const STORAGE_KEY = "ceb:config";
@@ -24,13 +24,13 @@ const STORAGE_KEY = "ceb:config";
 let config = buildDefaults();
 
 /**
- * Builds a config with every color unmapped.
+ * Builds a config with every color mapped to its default effect.
  * @returns {AddonConfig} A fresh default configuration.
  */
 function buildDefaults() {
     const mappings = {};
     for (const colorId of COLOR_IDS) {
-        mappings[colorId] = { effect: NO_EFFECT, amplifier: 0, particles: true };
+        mappings[colorId] = { effect: DEFAULT_EFFECTS[colorId], amplifier: 0, particles: true };
     }
     return { enabled: true, mode: MODE_CLOSEST, interval: 10, mappings };
 }

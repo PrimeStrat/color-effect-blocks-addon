@@ -38,3 +38,23 @@ export const EFFECTS = [
 export const EFFECT_IDS = EFFECTS.map((effect) => effect.id);
 
 export const NO_EFFECT = "none";
+
+/** @type {Object<string, string>} */
+export const DEFAULT_EFFECTS = {
+    white: "minecraft:levitation",
+    light_gray: "minecraft:slowness",
+    gray: "minecraft:weakness",
+    black: "minecraft:blindness",
+    brown: "minecraft:hunger",
+    red: "minecraft:strength",
+    orange: "minecraft:fire_resistance",
+    yellow: "minecraft:mining_fatigue",
+    lime: "minecraft:jump_boost",
+    green: "minecraft:poison",
+    cyan: "minecraft:conduit_power",
+    light_blue: "minecraft:speed",
+    blue: "minecraft:night_vision",
+    purple: "minecraft:nausea",
+    magenta: "minecraft:regeneration",
+    pink: "minecraft:health_boost"
+};
